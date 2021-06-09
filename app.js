@@ -1,4 +1,6 @@
 const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const pageRoute = require('./routes/pageRoute');
 const mongoose = require('mongoose');
 const courseRoute = require('./routes/courseRoute');
@@ -21,12 +23,30 @@ mongoose.connect(
 // Template Engine
 app.set('view engine', 'ejs');
 
+// Global Variable
+global.userIN = null;
+
 // Middleware
 app.use(express.static('public'));
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(
+  session({
+    secret: 'my_keyboard_cat',
+    resave: false,
+    saveUninitialized: true,
+    store: MongoStore.create({
+      mongoUrl:
+        'mongodb+srv://eraykeskin:eray123@cluster0.b3kpp.mongodb.net/Smartedu',
+    }),
+  })
+);
 
 // Routes
+app.use('*', (req, res, next) => {
+  userIN = req.session.userID;
+  next();
+});
 app.use('/', pageRoute);
 app.use('/courses', courseRoute);
 app.use('/categories', categoryRoute);
