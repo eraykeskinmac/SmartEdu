@@ -1,15 +1,19 @@
-<%- include('partials/_header') %> <%- include('partials/_navigation') %>
-
+<%- include('partials/_header') %> <%- include('partials/_navigation') %> <%
+if(user) { %> <% if(user.role ==='student') { %>
 <div class="all-title-box">
   <div class="container text-center">
-    <h1>
-      <%= user.name %><span class="m_1"
-        >Lorem Ipsum dolroin gravida nibh vel velit.</span
-      >
-    </h1>
+    <h1><%= user.name %><span class="m_1">STUDENT</span></h1>
   </div>
 </div>
 
+<% } %> <% if(user.role ==='teacher') { %>
+<div class="all-title-box">
+  <div class="container text-center">
+    <h1><%= user.name %><span class="m_1">TEACHER</span></h1>
+  </div>
+</div>
+
+<% } %>
 <div id="overviews" class="section wb">
   <div class="container">
     <div class="row">
@@ -127,5 +131,4 @@
   <!-- end container -->
 </div>
 <!-- end section -->
-
-<%- include('partials/_footer') %>
+<% } %> <%- include('partials/_footer') %>
