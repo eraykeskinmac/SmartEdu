@@ -12,15 +12,19 @@ const userRoute = require('./routes/userRoute');
 const app = express();
 
 // Connect to DB
-mongoose.connect(
-  'mongodb+srv://eraykeskin:eray123@cluster0.b3kpp.mongodb.net/Smartedu',
-  {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true,
-  }
-);
+mongoose
+  .connect(
+    'mongodb+srv://eraykeskin:eray123@cluster0.b3kpp.mongodb.net/Smartedu?retryWrites=true&w=majority',
+    {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      useFindAndModify: false,
+      useCreateIndex: true,
+    }
+  )
+  .then(() => {
+    console.log('Db connect');
+  });
 
 // Template Engine
 app.set('view engine', 'ejs');
@@ -64,7 +68,7 @@ app.use('/courses', courseRoute);
 app.use('/categories', categoryRoute);
 app.use('/users', userRoute);
 
-const port = 3000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`App started on port ${port}`);
 });
