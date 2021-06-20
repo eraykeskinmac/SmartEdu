@@ -30,19 +30,14 @@ if(user) { %> <% if(user.role==='student' ) { %>
           <div class="course-br">
             <div class="course-title">
               <h2>
-                <a href="/courses/<%= user.courses[i].slug %>" title=""
-                  ><%= user.courses[i].name %>
+                <a href="/courses/<%= user.courses[i].slug %>" title=""><%= user.courses[i].name %>
                 </a>
               </h2>
             </div>
             <div class="course-desc">
               <p><%= user.courses[i].description %></p>
               <form method="POST" action="/courses/release">
-                <input
-                  type="hidden"
-                  name="course_id"
-                  value="<%= user.courses[i]._id %>"
-                />
+                <input type="hidden" name="course_id" value="<%= user.courses[i]._id %>" />
                 <button class="btn btn-lg btn-danger text-white">
                   <span>RELEASE</span>
                 </button>
@@ -76,12 +71,8 @@ if(user) { %> <% if(user.role==='student' ) { %>
       <% } %> <% } %>
       <!-- Modal Button -->
       <div class="col-lg-12 text-center">
-        <button
-          class="btn btn-lg btn-warning rounded-0 text-white"
-          href="#"
-          data-toggle="modal"
-          data-target="#addCourse"
-        >
+        <button class="btn btn-lg btn-warning rounded-0 text-white" href="#" data-toggle="modal"
+          data-target="#addCourse">
           <span>CREATE NEW COURSE</span>
         </button>
       </div>
@@ -91,6 +82,7 @@ if(user) { %> <% if(user.role==='student' ) { %>
             <h3 class="author_name">COURSE FROM: <%= user.name %></h3>
           </div>
         </div>
+
       </div>
       <!-- end col -->
     </div>
@@ -105,93 +97,70 @@ if(user) { %> <% if(user.role==='student' ) { %>
           <div class="course-br">
             <div class="course-title">
               <h2>
-                <a href="/courses/<%= courses[i].slug %>" title=""
-                  ><%= courses[i].name %></a
-                >
+                <a href="/courses/<%= courses[i].slug %>" title=""><%= courses[i].name %></a>
               </h2>
             </div>
+
+
             <div class="course-desc">
               <p><%= courses[i].description %></p>
             </div>
             <div class="clearfix">
               <ul style="list-style-type: none">
                 <li style="float: left">
-                  <button
-                    class="btn btn-primary rounded-0 text-white"
-                    data-toggle="modal"
-                    data-target="#updateCourse<%= courses[i]._id %>"
-                  >
+                  <button class="btn btn-primary rounded-0 text-white" data-toggle="modal"
+                    data-target="#updateCourse<%= courses[i]._id %>">
                     <span>UPDATE</span>
                   </button>
                 </li>
                 <li style="float: right">
-                  <a
-                    href="/courses/<%= courses[i].slug %>?_method=DELETE"
-                    onclick="return confirm('ARE YOU SURE')"
-                    class="btn btn-danger rounded-0 text-white"
-                    ><span>DELETE</span></a
-                  >
+                  <a href="/courses/<%= courses[i].slug %>?_method=DELETE" onclick="return confirm('ARE YOU SURE')"
+                    class="btn btn-danger rounded-0 text-white"><span>DELETE</span></a>
                 </li>
               </ul>
             </div>
           </div>
+          <div class="course-meta-bot">
+            <ul>
+              <li>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <% courses[i].users.forEach((user) => { %>
+                <div> <%= user.name %></div>
+                <% }); %>
+                </i>
+              </li>
+            </ul>
+          </div>
+
         </div>
       </div>
       <!-- end col -->
       <!-- UPDATE Modal -->
-      <div
-        class="modal fade"
-        id="updateCourse<%= courses[i]._id %>"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="myModalLabel"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered modal-lg"
-          role="document"
-        >
+      <div class="modal fade" id="updateCourse<%= courses[i]._id %>" tabindex="-1" role="dialog"
+        aria-labelledby="myModalLabel">
+        <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
           <div class="modal-content">
             <div class="modal-body customer-box">
               <!-- Tab panes -->
               <div class="tab-content">
                 <div class="tab-pane active" id="Login">
-                  <form
-                    method="POST"
-                    action="/courses/<%= courses[i].slug %>?_method=PUT"
-                    class="form-horizontal"
-                  >
+                  <form method="POST" action="/courses/<%= courses[i].slug %>?_method=PUT" class="form-horizontal">
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <input
-                          type="text"
-                          name="name"
-                          value="<%= courses[i].name %>"
-                          class="form-control"
-                          placeholder="Course Name"
-                        />
+                        <input type="text" name="name" value="<%= courses[i].name %>" class="form-control"
+                          placeholder="Course Name" />
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <input
-                          type="hidden"
-                          name="role"
-                          class="form-control"
-                          value="<%= user.role %>"
-                        />
+                        <input type="hidden" name="role" class="form-control" value="<%= user.role %>" />
                       </div>
                     </div>
                     <div class="form-group">
                       <div class="col-sm-12">
-                        <textarea
-                          rows="8"
-                          name="description"
-                          class="form-control"
-                          placeholder="Course Description"
-                          required
-                        >
-<%= courses[i].description %></textarea
-                        >
+                        <textarea rows="8" name="description" class="form-control" placeholder="Course Description"
+                          required>
+<%= courses[i].description %></textarea>
                       </div>
                     </div>
                     <div class="form-group">
@@ -207,18 +176,11 @@ if(user) { %> <% if(user.role==='student' ) { %>
                     </div>
                     <div class="row">
                       <div class="col-sm-10">
-                        <button
-                          type="submit"
-                          class="btn btn-light btn-radius btn-brd grd1"
-                        >
+                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
                           Submit
                         </button>
-                        <button
-                          type="submit"
-                          class="btn btn-light btn-radius btn-brd grd1"
-                          data-dismiss="modal"
-                          aria-hidden="true"
-                        >
+                        <button type="submit" class="btn btn-light btn-radius btn-brd grd1" data-dismiss="modal"
+                          aria-hidden="true">
                           Cancel
                         </button>
                       </div>
@@ -232,19 +194,14 @@ if(user) { %> <% if(user.role==='student' ) { %>
       </div>
       <% } %>
     </div>
+
     <!-- end row -->
   </div>
   <!-- end container -->
 </div>
 <!-- end section -->
 <!-- ADD Modal -->
-<div
-  class="modal fade"
-  id="addCourse"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
->
+<div class="modal fade" id="addCourse" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body customer-box">
@@ -254,33 +211,18 @@ if(user) { %> <% if(user.role==='student' ) { %>
             <form method="POST" action="/courses" class="form-horizontal">
               <div class="form-group">
                 <div class="col-sm-12">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Course Name"
-                  />
+                  <input type="text" name="name" class="form-control" placeholder="Course Name" />
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <input
-                    type="hidden"
-                    name="role"
-                    class="form-control"
-                    value="<%= user.role %>"
-                  />
+                  <input type="hidden" name="role" class="form-control" value="<%= user.role %>" />
                 </div>
               </div>
               <div class="form-group">
                 <div class="col-sm-12">
-                  <textarea
-                    rows="8"
-                    name="description"
-                    class="form-control"
-                    placeholder="Course Description"
-                    required
-                  ></textarea>
+                  <textarea rows="8" name="description" class="form-control" placeholder="Course Description"
+                    required></textarea>
                 </div>
               </div>
               <div class="form-group">
@@ -296,18 +238,11 @@ if(user) { %> <% if(user.role==='student' ) { %>
               </div>
               <div class="row">
                 <div class="col-sm-10">
-                  <button
-                    type="submit"
-                    class="btn btn-light btn-radius btn-brd grd1"
-                  >
+                  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
                     Submit
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-light btn-radius btn-brd grd1"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
+                  <button type="submit" class="btn btn-light btn-radius btn-brd grd1" data-dismiss="modal"
+                    aria-hidden="true">
                     Cancel
                   </button>
                 </div>
@@ -359,12 +294,8 @@ if(user) { %> <% if(user.role==='student' ) { %>
             <td><%= users[i].email%></td>
             <td><%= users[i].role%></td>
             <td>
-              <a
-                href="/users/<%= users[i]._id%>?_method=DELETE"
-                onclick="return confirm('ARE YOU SURE')"
-                class="btn btn-danger rounded-0 text-white"
-                ><span>DELETE</span></a
-              >
+              <a href="/users/<%= users[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE')"
+                class="btn btn-danger rounded-0 text-white"><span>DELETE</span></a>
             </td>
           </tr>
           <% } %>
@@ -389,22 +320,14 @@ if(user) { %> <% if(user.role==='student' ) { %>
             <th scope="row"><%= categories[i]._id%></th>
             <td><%= categories[i].name%></td>
             <td>
-              <button
-                class="btn btn-lg btn-warning rounded-0 text-white"
-                href="#"
-                data-toggle="modal"
-                data-target="#addCategory"
-              >
+              <button class="btn btn-lg btn-warning rounded-0 text-white" href="#" data-toggle="modal"
+                data-target="#addCategory">
                 <span>ADD</span>
               </button>
             </td>
             <td>
-              <a
-                href="/categories/<%= categories[i]._id%>?_method=DELETE"
-                onclick="return confirm('ARE YOU SURE')"
-                class="btn btn-danger rounded-0 text-white"
-                ><span>DELETE</span></a
-              >
+              <a href="/categories/<%= categories[i]._id%>?_method=DELETE" onclick="return confirm('ARE YOU SURE')"
+                class="btn btn-danger rounded-0 text-white"><span>DELETE</span></a>
             </td>
           </tr>
           <% } %>
@@ -416,13 +339,7 @@ if(user) { %> <% if(user.role==='student' ) { %>
 </div>
 <!-- end section -->
 <!-- ADD Modal -->
-<div
-  class="modal fade"
-  id="addCategory"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="myModalLabel"
->
+<div class="modal fade" id="addCategory" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
   <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
     <div class="modal-content">
       <div class="modal-body customer-box">
@@ -432,28 +349,16 @@ if(user) { %> <% if(user.role==='student' ) { %>
             <form method="POST" action="/categories" class="form-horizontal">
               <div class="form-group">
                 <div class="col-sm-12">
-                  <input
-                    type="text"
-                    name="name"
-                    class="form-control"
-                    placeholder="Category Name"
-                  />
+                  <input type="text" name="name" class="form-control" placeholder="Category Name" />
                 </div>
               </div>
               <div class="row">
                 <div class="col-sm-10">
-                  <button
-                    type="submit"
-                    class="btn btn-light btn-radius btn-brd grd1"
-                  >
+                  <button type="submit" class="btn btn-light btn-radius btn-brd grd1">
                     Submit
                   </button>
-                  <button
-                    type="submit"
-                    class="btn btn-light btn-radius btn-brd grd1"
-                    data-dismiss="modal"
-                    aria-hidden="true"
-                  >
+                  <button type="submit" class="btn btn-light btn-radius btn-brd grd1" data-dismiss="modal"
+                    aria-hidden="true">
                     Cancel
                   </button>
                 </div>
