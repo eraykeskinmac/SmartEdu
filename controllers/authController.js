@@ -3,6 +3,7 @@ const User = require('../models/User');
 const Category = require('../models/Category');
 const Course = require('../models/Course');
 const { validationResult } = require('express-validator');
+
 exports.createUser = async (req, res) => {
   try {
     const user = await User.create(req.body);
@@ -56,8 +57,16 @@ exports.getDashboardPage = async (req, res) => {
     'courses'
   );
   const categories = await Category.find();
-  const courses = await Course.find({ user: req.session.userID });
+  let courses = await Course.find({ user: req.session.userID });
   const users = await User.find();
+
+  courses = await Promise.all(
+    courses.map(async (course, i) => {
+      course.users = await User.find({ courses: { $in: [course.id] } });
+      return course;
+    })
+  );
+
   res.status(200).render('dashboard', {
     page_name: 'dashboard',
     user,
