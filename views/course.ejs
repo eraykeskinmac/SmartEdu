@@ -3,9 +3,7 @@
 <div class="all-title-box">
   <div class="container text-center">
     <h1>
-      <%= course.name %><span class="m_1"
-        >Lorem Ipsum dolroin gravida nibh vel velit.</span
-      >
+      <%= course.name %><span class="m_1">Lorem Ipsum dolroin gravida nibh vel velit.</span>
     </h1>
   </div>
 </div>
@@ -22,11 +20,7 @@
             <% if (user && !(user.courses.includes(course._id)) ) { %>
             <div class="post-date">
               <form method="POST" action="/courses/enroll">
-                <input
-                  type="hidden"
-                  name="course_id"
-                  value="<%= course._id %>"
-                />
+                <input type="hidden" name="course_id" value="<%= course._id %>" />
                 <button class="btn btn-lg btn-warning text-white">
                   <span>ENROLL</span>
                 </button>
@@ -34,8 +28,7 @@
             </div>
             <% } %>
             <div class="meta-info-blog">
-              <span
-                ><i class="fa fa-calendar"></i> <a href="#">May 11, 2015</a>
+              <span><i class="fa fa-calendar"></i> <a href="#">May 11, 2015</a>
               </span>
             </div>
             <div class="blog-title">
@@ -59,13 +52,8 @@
           <div class="site-search-area">
             <form method="GET" id="site-searchform" action="/courses">
               <div>
-                <input
-                  class="input-text form-control"
-                  name="search"
-                  id="search-k"
-                  placeholder="Search..."
-                  type="text"
-                />
+                <input class="input-text form-control" name="search" id="search-k" placeholder="Search..."
+                  type="text" />
                 <button id="searchsubmit" value="Search" type="submit"></button>
               </div>
             </form>
@@ -76,9 +64,7 @@
           <ul>
             <% for (let i=0; i< categories.length; i++) { %>
             <li>
-              <a href="/courses?categories=<%= categories[i].slug %>"
-                ><%= categories[i].name %></a
-              >
+              <a href="/courses?categories=<%= categories[i].slug %>"><%= categories[i].name %></a>
             </li>
             <% } %>
           </ul>
